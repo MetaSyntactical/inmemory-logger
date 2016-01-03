@@ -119,6 +119,27 @@ final class LogQuery
     }
 
     /**
+     * Add LogLevelList.
+     *
+     * @param string[] $logLevelList list of valid log levels (@see Psr\LogLevel}
+     * @return LogQuery
+     */
+    public function withLogLevelList(array $logLevelList)
+    {
+        return $this->immutableWith('logLevelList', $logLevelList);
+    }
+
+    /**
+     * Remove LogLevelList.
+     *
+     * @return LogQuery
+     */
+    public function withoutLogLevelList()
+    {
+        return $this->immutableWith('logLevelList');
+    }
+
+    /**
      * Add LogMessageRegExp.
      *
      * @param string $logMessageRegExp
@@ -247,6 +268,7 @@ final class LogQuery
         Assertion::nullOrIsArray($this->logLevelList);
 
         if (!is_null($this->logLevelList)) {
+            Assertion::notEmpty($this->logLevelList);
             Assertion::allInArray(
                 $this->logLevelList,
                 array_values((new ReflectionClass(LogLevel::class))->getConstants())
