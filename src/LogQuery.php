@@ -10,7 +10,7 @@ use Psr\Log\LogLevel;
 use ReflectionClass;
 use RegexGuard\Factory as RegexGuardFactory;
 
-class LogQuery
+final class LogQuery
 {
     private $logTimeLowerBounds;
 
@@ -24,6 +24,18 @@ class LogQuery
 
     private $logContextFuzzy;
 
+    /**
+     * Create new LogQuery.
+     *
+     * All parameters may be optional and specified later ({@see with*}).
+     *
+     * @param DateTimeInterface|null $logTimeLowerBounds
+     * @param DateTimeInterface|null $logTimeUpperBounds
+     * @param null $logLevelList
+     * @param null $logMessageRegExp
+     * @param null $logMessageInString
+     * @param null $logContextFuzzy
+     */
     public function __construct(
         DateTimeInterface $logTimeLowerBounds = null,
         DateTimeInterface $logTimeUpperBounds = null,
@@ -57,6 +69,8 @@ class LogQuery
     }
 
     /**
+     * Add LogTimeLowerBounds.
+     *
      * @param DateTimeInterface $logTimeLowerBounds
      * @return LogQuery
      */
@@ -70,6 +84,8 @@ class LogQuery
     }
 
     /**
+     * Remove LogTimeLowerBounds.
+     *
      * @return LogQuery
      */
     public function withoutLogTimeLowerBounds()
@@ -78,6 +94,8 @@ class LogQuery
     }
 
     /**
+     * Add LogTimeUpperBounds.
+     *
      * @param DateTimeInterface $logTimeUpperBounds
      * @return LogQuery
      */
@@ -91,6 +109,8 @@ class LogQuery
     }
 
     /**
+     * Remove LogTimeUpperBounds.
+     *
      * @return LogQuery
      */
     public function withoutLogTimeUpperBounds()
@@ -99,11 +119,12 @@ class LogQuery
     }
 
     /**
-     * @param $logMessageRegExp
+     * Add LogMessageRegExp.
+     *
+     * @param string $logMessageRegExp
      * @return LogQuery
      */
-    public function withLogMessageRegExp(/* string */
-        $logMessageRegExp)
+    public function withLogMessageRegExp(/* string */ $logMessageRegExp)
     {
         Assertion::string($logMessageRegExp);
         Assertion::minLength($logMessageRegExp, 1);
@@ -112,6 +133,8 @@ class LogQuery
     }
 
     /**
+     * Remove LogMessageRegExp.
+     *
      * @return LogQuery
      */
     public function withoutLogMessageRegExp()
@@ -120,11 +143,12 @@ class LogQuery
     }
 
     /**
-     * @param $logMessageInString
+     * Add LogMessageInString.
+     *
+     * @param string $logMessageInString
      * @return LogQuery
      */
-    public function withLogMessageInString(/* string */
-        $logMessageInString)
+    public function withLogMessageInString(/* string */ $logMessageInString)
     {
         Assertion::string($logMessageInString);
         Assertion::minLength($logMessageInString, 1);
@@ -133,6 +157,8 @@ class LogQuery
     }
 
     /**
+     * Remove LogMessageInString.
+     *
      * @return LogQuery
      */
     public function withoutLogMessageInString()
@@ -141,11 +167,12 @@ class LogQuery
     }
 
     /**
-     * @param $logContextFuzzy
+     * Add LogContextFuzzy.
+     *
+     * @param string $logContextFuzzy
      * @return LogQuery
      */
-    public function withLogContextFuzzy(/* string */
-        $logContextFuzzy)
+    public function withLogContextFuzzy(/* string */ $logContextFuzzy)
     {
         Assertion::string($logContextFuzzy);
         Assertion::minLength($logContextFuzzy, 1);
@@ -154,6 +181,8 @@ class LogQuery
     }
 
     /**
+     * Remove LogContextFuzzy.
+     *
      * @return LogQuery
      */
     public function withoutLogContextFuzzy()
@@ -162,6 +191,8 @@ class LogQuery
     }
 
     /**
+     * Check whether given LogEntry would be matched by the LogQuery.
+     *
      * @param LogEntry $logEntry
      * @return bool
      */

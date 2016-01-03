@@ -8,7 +8,7 @@ use Psr\Log\LogLevel;
 use ReflectionClass;
 use RegexGuard\Factory as RegexGuardFactory;
 
-class LogEntry
+final class LogEntry
 {
     private $logDate;
 

@@ -9,7 +9,7 @@ use Psr\Log\LoggerTrait;
 use Psr\Log\LogLevel;
 use ReflectionClass;
 
-class InMemoryLogger implements LoggerInterface, InspectableLogger
+final class InMemoryLogger implements LoggerInterface, InspectableLogger
 {
     use LoggerTrait;
 
