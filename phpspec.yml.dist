@@ -1,0 +1,15 @@
+suites:
+    in-memory-logger:
+        namespace: MetaSyntactical\Log\InMemoryLogger
+        psr4_prefix: MetaSyntactical\Log\InMemoryLogger
+
+#extensions:
+#    - PhpSpec\Extension\CodeCoverageExtension
+
+#code_coverage:
+#    format:
+#        - html
+#        - clover
+#    output:
+#        html: build/coverage
+#        clover: build/coverage.xml

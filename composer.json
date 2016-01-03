@@ -1,0 +1,33 @@
+{
+  "name": "metasyntactical/inmemory-logger",
+  "description": "PSR-3 compatible InMemory Logger with ability to fetch logged entries from memory.",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Kreuer",
+      "email": "d.kreuer@danielkreuer.com"
+    }
+  ],
+  "require": {
+    "php": ">= 7.0.0",
+    "psr/log": "^1.0",
+    "beberlei/assert": "^2.4",
+    "regex-guard/regex-guard": "^1.1"
+  },
+  "require-dev": {
+    "phpspec/phpspec": "^2.4",
+    "henrikbjorn/phpspec-code-coverage": "^2.0"
+  },
+  "provide": {
+    "psr/log-implementation": "1.0.0"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "autoload": {
+    "psr-4": {
+      "MetaSyntactical\\Log\\InMemoryLogger\\": "src/"
+    }
+  }
+}
