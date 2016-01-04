@@ -1,0 +1,18 @@
+language: php
+
+matrix:
+    include:
+        - php: 7.0
+        - php: nightly
+        - php: hhvm
+        - php: hhvm-nightly
+
+before_install:
+    - composer self-update
+    - sudo locale-gen en_US.UTF-8 && sudo update-locale
+
+install:
+    - composer --prefer-dist install
+
+script:
+    - bin/phpspec run
