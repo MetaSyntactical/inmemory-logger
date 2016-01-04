@@ -4,8 +4,6 @@ matrix:
     include:
         - php: 7.0
         - php: nightly
-        - php: hhvm
-        - php: hhvm-nightly
 
 before_install:
     - composer self-update
