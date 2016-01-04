@@ -3,9 +3,11 @@
 namespace spec\MetaSyntactical\Log\InMemoryLogger;
 
 use DateTimeImmutable;
+use MetaSyntactical\Log\InMemoryLogger\LogEntry;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LogLevel;
+use stdClass;
 
 class LogEntrySpec extends ObjectBehavior
 {
@@ -200,5 +202,32 @@ class LogEntrySpec extends ObjectBehavior
         $this
             ->containsFuzzyContext('foo')
             ->shouldBe(false);
+    }
+
+    function it_should_replace_curly_brackets_with_contents_from_context()
+    {
+        $this->beConstructedWith(
+            new DateTimeImmutable('2010-02-03 08:00:00 UTC'),
+            LogLevel::INFO,
+            'Test {replace} message {object} {world}',
+            [
+                'replace' => 'with',
+                'object' => new stdClass(),
+                'world' => new LogEntry(
+                    new DateTimeImmutable('2010-02-02 00:00:00 UTC'),
+                    LogLevel::INFO,
+                    'Test',
+                    [],
+                    []
+                ),
+            ],
+            []
+        );
+
+        $this
+            ->__toString()
+            ->shouldBe(
+                '2010-02-03T08:00:00+00:00 [info] Test with message stdClass 2010-02-02T00:00:00+00:00 [info] Test [] {"replace":"with","object":{},"world":{}}'
+            );
     }
 }

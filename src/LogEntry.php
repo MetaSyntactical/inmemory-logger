@@ -87,8 +87,28 @@ final class LogEntry
             '%s [%s] %s %s',
             $this->logDate->format('c'),
             $this->logLevel,
-            $this->logMessage,
+            $this->replaceCurlyBrackets($this->logMessage, $this->logContext),
             json_encode($this->logContext)
+        );
+    }
+
+    private function replaceCurlyBrackets($logMessage, $logContext)
+    {
+        return preg_replace_callback(
+            '(\{(.*?)\})',
+            function ($matches) use ($logContext) {
+                if (isset($logContext[$matches[1]])) {
+                    if (is_object($logContext[$matches[1]])
+                        && !method_exists($logContext[$matches[1]], '__toString')) {
+                        return get_class($logContext[$matches[1]]);
+                    }
+
+                    return (string) $logContext[$matches[1]];
+                }
+
+                return $matches[0];
+            },
+            $logMessage
         );
     }
 }
