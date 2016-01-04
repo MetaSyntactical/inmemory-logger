@@ -1,0 +1,20 @@
+source:
+    - src
+    - vendor
+
+exclude:
+    - */tests/*
+    - */Tests/*
+    - */vendor/Test/*
+
+skipDocPath:
+    - */vendor/*
+
+destination: build/apidoc
+
+noSourceCode: true
+templateTheme: bootstrap
+deprecated: true
+accessLevels:
+    - public
+    - protected
