@@ -2,7 +2,10 @@
 
 namespace spec\MetaSyntactical\Log\InMemoryLogger;
 
+use DateInterval;
+use DateTime;
 use DateTimeImmutable;
+use DateTimeInterface;
 use MetaSyntactical\Log\InMemoryLogger\LogEntry;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -14,6 +17,40 @@ class LogQuerySpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('MetaSyntactical\Log\InMemoryLogger\LogQuery');
+    }
+
+    function it_should_not_modify_time_if_datetime_given()
+    {
+        $dateTime = new DateTime('2000-01-01 00:00:00 UTC');
+
+        $object1 = $this->withLogTimeLowerBounds($dateTime);
+
+        $dateTime->add(new DateInterval('P1Y'));
+
+        $object1->shouldNotPropertyEqualValue('logTimeLowerBounds', $dateTime->format('c'));
+
+        $object1 = $this->withLogTimeUpperBounds($dateTime);
+
+        $dateTime->add(new DateInterval('P1Y'));
+
+        $object1->shouldNotPropertyEqualValue('logTimeUpperBounds', $dateTime->format('c'));
+    }
+
+    function it_should_not_modify_time_if_constructed_with_datetime()
+    {
+        $dateTimeLower = new DateTime('2000-01-01 00:00:00 UTC');
+        $dateTimeUpper = new DateTime('2001-01-01 00:00:00 UTC');
+
+        $this->beConstructedWith(
+            $dateTimeLower,
+            $dateTimeUpper
+        );
+
+        $dateTimeLower->add(new DateInterval('P2Y'));
+        $dateTimeUpper->add(new DateInterval('P1Y'));
+
+        $this->shouldNotPropertyEqualValue('logTimeLowerBounds', $dateTimeLower->format('c'));
+        $this->shouldNotPropertyEqualValue('logTimeUpperBounds', $dateTimeUpper->format('c'));
     }
 
     function it_is_immutable_to_setting_and_resetting_log_time_lower_bounds()
@@ -377,7 +414,18 @@ class LogQuerySpec extends ObjectBehavior
                 $subjectProperty->setAccessible(true);
 
                 return $subjectProperty->getValue($subject) == $subjectProperty->getValue($comparedObject);
-            }
+            },
+            'propertyEqualValue' => function ($subject, $propertyKey, $comparedValue) {
+                $subjectProperty = (new ReflectionObject($subject))->getProperty($propertyKey);
+                $subjectProperty->setAccessible(true);
+
+                $subjectValue = $subjectProperty->getValue($subject);
+                if ($subjectValue instanceof DateTimeInterface) {
+                    $subjectValue = $subjectValue->format('c');
+                }
+
+                return $subjectValue === $comparedValue;
+            },
         ];
     }
 }
