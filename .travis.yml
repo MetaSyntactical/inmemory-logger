@@ -30,7 +30,8 @@ before_install:
     - sudo locale-gen en_US.UTF-8 && sudo update-locale
 
 install:
-    - composer --prefer-dist install
+    - if [ "$deps" = "low" ]; then composer update --prefer-lowest; fi
+    - if [ "$deps" != "low" ]; then composer update --prefer-source; fi
 
 script:
     - bin/phpspec run
