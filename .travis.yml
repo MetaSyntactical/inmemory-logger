@@ -1,12 +1,29 @@
 language: php
 
 matrix:
+    fast_finish: true
     include:
-        - php: 7.2
-        - php: 7.3
-        - php: 7.4snapshot
-    allowed_failures:
-        - php: nightly
+        - php: "7.2"
+          env: "deps=low"
+        - php: "7.2"
+          env: "deps=default"
+        - php: "7.3"
+          env: "deps=low"
+        - php: "7.3"
+          env: "deps=default"
+        - php: "7.4snapshot"
+          env: "deps=low"
+        - php: "7.4snapshot"
+          env: "deps=default"
+        - php: "nightly"
+          env: "deps=low"
+        - php: "nightly"
+          env: "deps=default"
+    allow_failures:
+        - php: "nightly"
+          env: "deps=low"
+        - php: "nightly"
+          env: "deps=default"
 
 before_install:
     - composer self-update
