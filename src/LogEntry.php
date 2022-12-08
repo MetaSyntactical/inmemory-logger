@@ -58,7 +58,7 @@ final class LogEntry
     public function containsRegExp($regExp)
     {
         Assert::string($regExp);
-        Assert::minLength($regExp, 1);
+        Assert::minLength($regExp, 2);
 
         $guard = RegexGuardFactory::getGuard();
 
