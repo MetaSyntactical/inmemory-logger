@@ -5,9 +5,9 @@ namespace spec\MetaSyntactical\Log\InMemoryLogger;
 use DateTimeImmutable;
 use MetaSyntactical\Log\InMemoryLogger\LogEntry;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Psr\Log\LogLevel;
 use stdClass;
+use Webmozart\Assert;
 
 class LogEntrySpec extends ObjectBehavior
 {
@@ -35,7 +35,7 @@ class LogEntrySpec extends ObjectBehavior
         );
 
         $this
-            ->shouldThrow('Assert\InvalidArgumentException')
+            ->shouldThrow(Assert\InvalidArgumentException::class)
             ->duringInstantiation();
     }
 

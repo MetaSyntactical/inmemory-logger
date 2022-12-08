@@ -26,7 +26,7 @@ final class InMemoryLogger implements LoggerInterface, InspectableLogger
     /**
      * {@inheritdoc}
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, string|\Stringable $message, array $context = []): void
     {
         if (!in_array($level, $this->allowedLogLevels)) {
             throw new InvalidArgumentException(
