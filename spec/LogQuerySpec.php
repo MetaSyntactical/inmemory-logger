@@ -406,7 +406,7 @@ class LogQuerySpec extends ObjectBehavior
             ->shouldBe(false);
     }
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'propertyEqual' => function ($subject, $propertyKey, $comparedObject) {
