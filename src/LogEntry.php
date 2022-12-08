@@ -2,11 +2,11 @@
 
 namespace MetaSyntactical\Log\InMemoryLogger;
 
-use Assert\Assertion;
 use DateTimeInterface;
 use Psr\Log\LogLevel;
 use ReflectionClass;
 use RegexGuard\Factory as RegexGuardFactory;
+use Webmozart\Assert\Assert;
 
 final class LogEntry
 {
@@ -27,11 +27,11 @@ final class LogEntry
         array $logContext,
         array $logCallGraph
     ) {
-        Assertion::inArray(
+        Assert::inArray(
             $logLevel,
             (new ReflectionClass(LogLevel::class))->getConstants()
         );
-        Assertion::string($logMessage);
+        Assert::string($logMessage);
 
         $this->logDate = $logDate;
         $this->logLevel = $logLevel;
@@ -57,8 +57,8 @@ final class LogEntry
 
     public function containsRegExp($regExp)
     {
-        Assertion::string($regExp);
-        Assertion::minLength($regExp, 1);
+        Assert::string($regExp);
+        Assert::minLength($regExp, 2);
 
         $guard = RegexGuardFactory::getGuard();
 
@@ -67,16 +67,16 @@ final class LogEntry
 
     public function containsText($partial)
     {
-        Assertion::string($partial);
-        Assertion::minLength($partial, 1);
+        Assert::string($partial);
+        Assert::minLength($partial, 1);
 
         return mb_strpos($this->logMessage, $partial) !== false;
     }
 
     public function containsFuzzyContext($partial)
     {
-        Assertion::string($partial);
-        Assertion::minLength($partial, 1);
+        Assert::string($partial);
+        Assert::minLength($partial, 1);
 
         return mb_strpos(json_encode($this->logContext), $partial) !== false;
     }
@@ -95,7 +95,7 @@ final class LogEntry
     private function replaceCurlyBrackets($logMessage, $logContext)
     {
         return preg_replace_callback(
-            '(\{(.*?)\})',
+            '(\{(.*?)})',
             function ($matches) use ($logContext) {
                 if (isset($logContext[$matches[1]])) {
                     if (is_object($logContext[$matches[1]])

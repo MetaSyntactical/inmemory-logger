@@ -2,13 +2,13 @@
 
 namespace MetaSyntactical\Log\InMemoryLogger;
 
-use Assert\Assertion;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Psr\Log\LogLevel;
 use ReflectionClass;
 use RegexGuard\Factory as RegexGuardFactory;
+use Webmozart\Assert\Assert;
 
 final class LogQuery
 {
@@ -44,12 +44,12 @@ final class LogQuery
         /* string */ $logMessageInString = null,
         /* string */ $logContextFuzzy = null
     ) {
-        Assertion::nullOrIsInstanceOf($logTimeLowerBounds, DateTimeInterface::class);
-        Assertion::nullOrIsInstanceOf($logTimeUpperBounds, DateTimeInterface::class);
-        Assertion::nullOrIsArray($logLevelList);
-        Assertion::nullOrString($logMessageRegExp);
-        Assertion::nullOrString($logMessageInString);
-        Assertion::nullOrString($logContextFuzzy);
+        Assert::nullOrIsInstanceOf($logTimeLowerBounds, DateTimeInterface::class);
+        Assert::nullOrIsInstanceOf($logTimeUpperBounds, DateTimeInterface::class);
+        Assert::nullOrIsArray($logLevelList);
+        Assert::nullOrString($logMessageRegExp);
+        Assert::nullOrString($logMessageInString);
+        Assert::nullOrString($logContextFuzzy);
 
         if ($logTimeLowerBounds instanceof DateTime) {
             $logTimeLowerBounds = DateTimeImmutable::createFromMutable($logTimeLowerBounds);
@@ -147,8 +147,8 @@ final class LogQuery
      */
     public function withLogMessageRegExp(/* string */ $logMessageRegExp)
     {
-        Assertion::string($logMessageRegExp);
-        Assertion::minLength($logMessageRegExp, 1);
+        Assert::string($logMessageRegExp);
+        Assert::minLength($logMessageRegExp, 1);
 
         return $this->immutableWith('logMessageRegExp', $logMessageRegExp);
     }
@@ -171,8 +171,8 @@ final class LogQuery
      */
     public function withLogMessageInString(/* string */ $logMessageInString)
     {
-        Assertion::string($logMessageInString);
-        Assertion::minLength($logMessageInString, 1);
+        Assert::string($logMessageInString);
+        Assert::minLength($logMessageInString, 1);
 
         return $this->immutableWith('logMessageInString', $logMessageInString);
     }
@@ -195,8 +195,8 @@ final class LogQuery
      */
     public function withLogContextFuzzy(/* string */ $logContextFuzzy)
     {
-        Assertion::string($logContextFuzzy);
-        Assertion::minLength($logContextFuzzy, 1);
+        Assert::string($logContextFuzzy);
+        Assert::minLength($logContextFuzzy, 1);
 
         return $this->immutableWith('logContextFuzzy', $logContextFuzzy);
     }
@@ -260,29 +260,29 @@ final class LogQuery
 
     private function validate()
     {
-        Assertion::nullOrString($this->logMessageRegExp);
-        Assertion::nullOrString($this->logMessageInString);
-        Assertion::nullOrString($this->logContextFuzzy);
-        Assertion::nullOrIsInstanceOf($this->logTimeLowerBounds, DateTimeInterface::class);
-        Assertion::nullOrIsInstanceOf($this->logTimeUpperBounds, DateTimeInterface::class);
-        Assertion::nullOrIsArray($this->logLevelList);
+        Assert::nullOrString($this->logMessageRegExp);
+        Assert::nullOrString($this->logMessageInString);
+        Assert::nullOrString($this->logContextFuzzy);
+        Assert::nullOrIsInstanceOf($this->logTimeLowerBounds, DateTimeInterface::class);
+        Assert::nullOrIsInstanceOf($this->logTimeUpperBounds, DateTimeInterface::class);
+        Assert::nullOrIsArray($this->logLevelList);
 
         if (!is_null($this->logLevelList)) {
-            Assertion::notEmpty($this->logLevelList);
-            Assertion::allInArray(
+            Assert::notEmpty($this->logLevelList);
+            Assert::allInArray(
                 $this->logLevelList,
                 array_values((new ReflectionClass(LogLevel::class))->getConstants())
             );
         }
 
         if (!is_null($this->logMessageRegExp)) {
-            Assertion::true(
+            Assert::true(
                 RegexGuardFactory::getGuard()->isRegexValid($this->logMessageRegExp)
             );
         }
 
         if (!is_null($this->logTimeLowerBounds) && !is_null($this->logTimeUpperBounds)) {
-            Assertion::false(
+            Assert::false(
                 $this->logTimeLowerBounds->diff($this->logTimeUpperBounds)->invert
             );
         }

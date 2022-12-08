@@ -8,9 +8,9 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use MetaSyntactical\Log\InMemoryLogger\LogEntry;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Psr\Log\LogLevel;
 use ReflectionObject;
+use Webmozart\Assert;
 
 class LogQuerySpec extends ObjectBehavior
 {
@@ -128,7 +128,7 @@ class LogQuerySpec extends ObjectBehavior
     function it_throws_exception_on_invalid_regexp()
     {
         $this
-            ->shouldThrow('Assert\InvalidArgumentException')
+            ->shouldThrow(Assert\InvalidArgumentException::class)
             ->duringWithLogMessageRegExp('((message)');
     }
 
@@ -138,7 +138,7 @@ class LogQuerySpec extends ObjectBehavior
             new DateTimeImmutable('2005-05-05 08:00:00 UTC')
         );
         $object
-            ->shouldThrow('Assert\InvalidArgumentException')
+            ->shouldThrow(Assert\InvalidArgumentException::class)
             ->duringWithLogTimeUpperBounds(
                 new DateTimeImmutable('2005-05-04 08:00:00 UTC')
             );

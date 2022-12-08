@@ -5,7 +5,6 @@ namespace spec\MetaSyntactical\Log\InMemoryLogger;
 use InvalidArgumentException;
 use MetaSyntactical\Log\InMemoryLogger\LogQuery;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Psr\Log\LogLevel;
 
 class InMemoryLoggerSpec extends ObjectBehavior

@@ -2,7 +2,6 @@
 
 vendor/
 bin/
-composer.lock
 phpspec.yml
 .php-version
 build/
