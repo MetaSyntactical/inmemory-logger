@@ -16,8 +16,7 @@
     "regex-guard/regex-guard": "^1.1"
   },
   "require-dev": {
-    "phpspec/phpspec": "^2.4",
-    "henrikbjorn/phpspec-code-coverage": "^2.0"
+    "phpspec/phpspec": "^2.4"
   },
   "provide": {
     "psr/log-implementation": "1.0.0"
