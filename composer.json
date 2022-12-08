@@ -11,7 +11,7 @@
   ],
   "require": {
     "php": "8.0.*||8.1.*",
-    "psr/log": "^3.0",
+    "psr/log": "^1.0|^2.0|3.0",
     "regex-guard/regex-guard": "^1.1",
     "webmozart/assert": "^1.11"
   },
@@ -19,7 +19,7 @@
     "phpspec/phpspec": "^7.2"
   },
   "provide": {
-    "psr/log-implementation": "3.0.0"
+    "psr/log-implementation": "1.0|2.0|3.0"
   },
   "config": {
     "bin-dir": "bin"
