@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerTrait;
 use Psr\Log\LogLevel;
 use ReflectionClass;
+use Stringable;
 
 final class InMemoryLogger implements LoggerInterface, InspectableLogger
 {
@@ -26,7 +27,7 @@ final class InMemoryLogger implements LoggerInterface, InspectableLogger
     /**
      * {@inheritdoc}
      */
-    public function log($level, string|\Stringable $message, array $context = []): void
+    public function log($level, string|Stringable $message, array $context = []): void
     {
         if (!in_array($level, $this->allowedLogLevels)) {
             throw new InvalidArgumentException(
