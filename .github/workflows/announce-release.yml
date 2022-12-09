@@ -7,10 +7,14 @@ jobs:
   mastodon:
     runs-on: ubuntu-latest
     steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v3"
+
       - uses: sergeysova/jq-action@v2
         id: project-name
         with:
           cmd: 'jq .name composer.json -r'
+
       - uses: rzr/fediverse-action@v0.0.6
         with:
           access-token: ${{ secrets.MASTODON_ACCESS_TOKEN }}
