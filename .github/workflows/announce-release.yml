@@ -27,3 +27,5 @@ jobs:
             
             Packagist: https://packagist.org/${{ steps.project-name.outputs.value }}#{{ github.ref_name }}
             Release Notes: https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}
+
+            #opensource #php #library #release
