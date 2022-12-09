@@ -15,10 +15,13 @@ jobs:
         with:
           cmd: 'jq .name composer.json -r'
 
-      - uses: rzr/fediverse-action@v0.0.6
+      - id: mastodon
+        uses: cbrgm/mastodon-github-action@v1
+        env:
+          MASTODON_URL: https://toot.metasyntactical.com
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
         with:
-          access-token: ${{ secrets.MASTODON_ACCESS_TOKEN }}
-          host: toot.metasyntactical.com
+          visibility: unlisted
           message: |
             We are happy to announce a new release of: ${{ steps.project-name.outputs.value }} ${{ github.ref_name }}
             
