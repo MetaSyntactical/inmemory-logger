@@ -25,7 +25,7 @@ jobs:
           message: |
             We are happy to announce a new release of: ${{ steps.project-name.outputs.value }} ${{ github.ref_name }}
             
-            Packagist: https://packagist.org/${{ steps.project-name.outputs.value }}#${{ github.ref_name }}
+            Packagist: https://packagist.org/packages/${{ steps.project-name.outputs.value }}#${{ github.ref_name }}
             Release Notes: https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}
 
             #opensource #php #library #release
