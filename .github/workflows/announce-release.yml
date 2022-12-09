@@ -1,0 +1,22 @@
+name: "Announce Release"
+on:
+  release:
+    types: [created]
+
+jobs:
+  mastodon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: sergeysova/jq-action@v2
+        id: project-name
+        with:
+          cmd: 'jq .name composer.json -r'
+      - uses: rzr/fediverse-action@v0.0.6
+        with:
+          access-token: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          host: toot.metasyntactical.com
+          message: |
+            We are happy to announce a new release of: ${{ steps.project-name.outputs.value }} ${{ github.ref }}
+            
+            Packagist: https://packagist.org/${{ steps.project-name.outputs.value }}#{{ github.ref }}
+            Release Notes: https://github.com/${{ github.repository }}/releases/tag/${{ github.ref }}
