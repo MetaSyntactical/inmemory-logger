@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "975079db1d68204301767e2f0905a24f",
+    "content-hash": "fa3e448b0db673e9ec242ee04d3ac16e",
     "packages": [
         {
             "name": "psr/log",
@@ -443,22 +443,22 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "7.2.0",
+            "version": "7.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "bbeb10f73c02bfa11d92159ad9d3e75abc3faa69"
+                "reference": "7e44b188e8e01f9c9a8ca6cb0d7aceaabcea2133"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/bbeb10f73c02bfa11d92159ad9d3e75abc3faa69",
-                "reference": "bbeb10f73c02bfa11d92159ad9d3e75abc3faa69",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/7e44b188e8e01f9c9a8ca6cb0d7aceaabcea2133",
+                "reference": "7e44b188e8e01f9c9a8ca6cb0d7aceaabcea2133",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.5",
                 "ext-tokenizer": "*",
-                "php": "^7.3 || 8.0.* || 8.1.*",
+                "php": "^7.3 || 8.0.* || 8.1.* || 8.2.*",
                 "phpspec/php-diff": "^1.0.0",
                 "phpspec/prophecy": "^1.9",
                 "sebastian/exporter": "^3.0 || ^4.0",
@@ -486,7 +486,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "7.2.x-dev"
+                    "dev-main": "7.3.x-dev"
                 }
             },
             "autoload": {
@@ -526,9 +526,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpspec/phpspec/issues",
-                "source": "https://github.com/phpspec/phpspec/tree/7.2.0"
+                "source": "https://github.com/phpspec/phpspec/tree/7.3.0"
             },
-            "time": "2022-03-14T09:04:31+00:00"
+            "time": "2022-12-14T16:15:59+00:00"
         },
         {
             "name": "phpspec/prophecy",

@@ -16,7 +16,7 @@
     "webmozart/assert": "^1.11"
   },
   "require-dev": {
-    "phpspec/phpspec": "^7.2"
+    "phpspec/phpspec": "^7.3"
   },
   "provide": {
     "psr/log-implementation": "1.0|2.0|3.0"
